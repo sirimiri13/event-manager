@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+import RealmSwift
+import SCLAlertView
 class CreateGuest: UIViewController, UITextViewDelegate {
     var indexPathForGuest : IndexPath? = nil
     @IBOutlet weak var firstName: UITextField!
@@ -15,22 +16,28 @@ class CreateGuest: UIViewController, UITextViewDelegate {
     @IBOutlet weak var tableText: UITextField!
     @IBOutlet weak var lastName: UITextField!
     @IBOutlet weak var guestText: UITextField!
-   
-   
+
     
-    var guest : Guests? = nil
-    
+      let realm = try! Realm()
     
     	
     override func viewDidLoad() {
           super.viewDidLoad()
-        firstName.text = guest?.fristName
-        lastName.text = guest?.lastName
-        guestText.text = guest?.guest
-        tableText.text = guest?.table
-        sectionText.text = guest?.section
+        
+    //   let guest = myGuests()
+        
+     
+       
+       /* firstName.text = guest.firstName
+        lastName.text = guest.lastName
+        guestText.text
+        
+        try! realm.write {
+            realm.add(guest)
+        }
+        print(realm.objects(myGuests.self))*/
         self.HiddenKeyBoard()
-      
+    
     
                 // Do any additional setup after loading the view.
     }
@@ -51,6 +58,24 @@ class CreateGuest: UIViewController, UITextViewDelegate {
 
     }
     
+    @IBAction func addGuest(_ sender: Any) {
+        let alert = SCLAlertView()
+        if (firstName.text == "" || lastName.text == "" || guestText.text == "" || tableText.text == "" || sectionText.text == "") {
+            alert.showError("Error", subTitle: "Please complete information")
+        }
+        else {
+            let guest = myGuests()
+            guest.firstName = firstName.text
+            guest.lastName = lastName.text
+            guest.guest = guestText.text
+            guest.table = tableText.text
+            guest.section = sectionText.text
+            try! realm.write{
+                realm.add(guest)
+            }
+            print(realm.objects(myGuests.self))
+        }
+    }
 }
 extension CreateGuest{
     func HiddenKeyBoard(){

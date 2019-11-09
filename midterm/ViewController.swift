@@ -8,6 +8,7 @@
 
 import UIKit
 import SCLAlertView
+import RealmSwift
 
 
 class ViewController: UIViewController {

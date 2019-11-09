@@ -24,6 +24,9 @@ class CreateView: UIViewController {
           let story = self.storyboard
           let addView = story?.instantiateViewController(withIdentifier: "AddEvent") as! AddEvent
             self.present(addView, animated: false)
+          /*  try! realm.write {
+                            realm.deleteAll()
+                          }*/
           }
         /*alert.addButton("Cancel"){ () -> Void in
         }*/

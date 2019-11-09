@@ -7,10 +7,12 @@
 //
 
 import Foundation
-struct Guests {
-    let fristName: String
-    let lastName: String
-    let guest: String
-    let table: String
-    let section: String
+import RealmSwift 
+
+class myGuests : Object {
+    @objc dynamic var firstName: String?
+    @objc dynamic var lastName: String?
+    @objc dynamic var guest: String?
+    @objc dynamic var table: String?
+    @objc dynamic var section: String?
 }

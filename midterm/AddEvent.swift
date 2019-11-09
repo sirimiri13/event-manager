@@ -7,11 +7,17 @@
 //
 				
 import UIKit
+import RealmSwift
 class AddEvent: UIViewController, UITableViewDelegate, UITableViewDataSource{
    
-    var myGuest: [Guests] = []
-  //  let tab : UITableView
-    //var tableView : UITableView!
+        let realm = try! Realm()
+    var myGuest = myGuests()
+    var listGuest : Results<myGuests>{
+        get {
+            return realm.objects(myGuests.self)
+        }
+    }
+    
 
     @IBOutlet weak var recordsList: UITableView!
     
@@ -27,9 +33,21 @@ class AddEvent: UIViewController, UITableViewDelegate, UITableViewDataSource{
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-      //  super.viewDidLoad()
-           let Huong = Guests(fristName: "Huong", lastName: "Lam", guest: "2", table: "1", section: "A")
-        myGuest.append(Huong)
+    
+        //  super.viewDidLoad()
+          /*let Huong = myGuests()
+        Huong.firstName = "Lam"
+        Huong.lastName = "Huong"
+        Huong.guest = "2"
+        Huong.table = "1"
+        Huong.section = "A"
+        
+        try! realm.write {
+            realm.add(Huong)
+        }
+        print(realm.objects(myGuests.self))*/
+        //myGuest.add
+        
        // tableView.dataSource = self
         //tableView.delegate = self
        
@@ -40,20 +58,25 @@ class AddEvent: UIViewController, UITableViewDelegate, UITableViewDataSource{
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-              return myGuest.count
+        return listGuest.count
        }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
            let cell1 = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! MyCell
-           let guests = myGuest[indexPath.row]
-           let fullname = "\(guests.fristName), \(guests.lastName)"
-           cell1.nameText.text = fullname
-           cell1.guest.text = guests.guest
-           cell1.table.text = guests.table
-           cell1.section.text = guests.section
-           
-           // Configure the cell...
             
-           return cell1    }
+       let item = listGuest[indexPath.row]
+        
+        
+        cell1.nameText.text = item.firstName
+        cell1.lastName.text = item.lastName
+        cell1.guest.text = item.guest
+        
+        cell1.table.text = item.table
+        cell1.section.text = item.section
+       // recordsList.reloadData()
+         return cell1
+       }
+    
 
     /*
     // MARK: - Navigation
@@ -70,16 +93,15 @@ class AddEvent: UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBAction func unwindToAddGuest(segue: UIStoryboardSegue){}
         
     
-    @IBAction func AddEvent(segue: UIStoryboardSegue){
-      guard let guest = segue.source as? CreateGuest else {return}
+  @IBAction func AddEvent(segue: UIStoryboardSegue){
+    guard let guest = segue.source as? CreateGuest else {return}
     guard let fName = guest.firstName.text, let lName = guest.lastName.text, let guests = guest.tableText.text, let table = guest.tableText.text, let section = guest.sectionText.text else {return}
-             let newGuest = Guests(fristName: fName, lastName: lName, guest: guests, table: table, section: section)
-                    if let indexPath = guest.indexPathForGuest {
-                        myGuest[indexPath.row] = newGuest
-                    }
-                    else {
-                     myGuest.append(newGuest)
-                    }
+             let newGuest = myGuests()
+        newGuest.firstName = fName
+        newGuest.lastName = lName
+        newGuest.guest = guests
+        newGuest.table = table
+        newGuest.section = section
         recordsList.reloadData()
 }
 

@@ -10,6 +10,7 @@ import UIKit
 
 class MyCell: UITableViewCell {
 
+    @IBOutlet weak var lastName: UILabel!
     @IBOutlet weak var section: UILabel!
     @IBOutlet weak var table: UILabel!
     @IBOutlet weak var guest: UILabel!
