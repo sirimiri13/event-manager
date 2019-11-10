@@ -8,5 +8,5 @@ target 'midterm' do
   # Pods for midterm
 pod 'SCLAlertView'
 pod 'RealmSwift'
-
+pod 'ColorPickTip'
 end

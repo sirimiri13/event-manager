@@ -8,9 +8,9 @@
 
 import UIKit
 import SCLAlertView
+import RealmSwift
 class CreateView: UIViewController {
-  
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,17 +19,14 @@ class CreateView: UIViewController {
  
 
     @IBAction func createEvent(_ sender: Any) {
-        let alert = SCLAlertView()
+       let alert = SCLAlertView()
         alert.addButton("OK"){ () -> Void in
           let story = self.storyboard
           let addView = story?.instantiateViewController(withIdentifier: "AddEvent") as! AddEvent
             self.present(addView, animated: false)
-          /*  try! realm.write {
-                            realm.deleteAll()
-                          }*/
+         
           }
-        /*alert.addButton("Cancel"){ () -> Void in
-        }*/
+        
         alert.showInfo("", subTitle: "Creating new event will delete all the info from the previous or current event in the app")
     }
     
@@ -40,7 +37,12 @@ class CreateView: UIViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    @IBAction func unwindToCreateEvent(segue: UIStoryboardSegue){}
+    @IBAction func unwindToCreateEvent(segue: UIStoryboardSegue){
+       
+      
+    }
+    @IBAction func saveEvent(segue: UIStoryboardSegue){
+    }
 }
 
 

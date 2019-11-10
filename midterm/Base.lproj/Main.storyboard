@@ -41,7 +41,7 @@
                                 </constraints>
                                 <state key="normal" title="Button" image="ic-admin"/>
                                 <connections>
-                                    <segue destination="pZc-F9-XFJ" kind="presentation" modalPresentationStyle="fullScreen" id="47n-EF-omr"/>
+                                    <segue destination="pZc-F9-XFJ" kind="presentation" modalPresentationStyle="fullScreen" id="UTk-em-rxO"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -68,8 +68,8 @@
         <!--Create View-->
         <scene sceneID="9Wf-87-qVB">
             <objects>
-                <viewController id="pZc-F9-XFJ" customClass="CreateView" customModule="midterm" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="MrS-us-MaX">
+                <viewController storyboardIdentifier="CreateView" id="pZc-F9-XFJ" customClass="CreateView" customModule="midterm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="CreateView" id="MrS-us-MaX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -86,7 +86,6 @@
                                     <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="createEvent:" destination="eKO-B8-R3W" eventType="touchUpInside" id="10z-ta-EYg"/>
                                     <action selector="createEvent:" destination="pZc-F9-XFJ" eventType="touchUpInside" id="27h-vS-Q9Y"/>
                                 </connections>
                             </button>
@@ -146,7 +145,7 @@
         <!--Add Event-->
         <scene sceneID="IYR-MR-Rs2">
             <objects>
-                <viewController storyboardIdentifier="AddEvent" id="Guh-ED-dni" customClass="AddEvent" customModule="midterm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddEvent" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Guh-ED-dni" customClass="AddEvent" customModule="midterm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zXt-A8-ep3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -287,7 +286,7 @@
                                 </constraints>
                                 <state key="normal" title="Button" image="exit"/>
                                 <connections>
-                                    <segue destination="9Yi-IJ-VIu" kind="unwind" unwindAction="unwindToCreateEventWithSegue:" id="L2c-uS-ADt"/>
+                                    <action selector="exitNewEvent:" destination="Guh-ED-dni" eventType="touchUpInside" id="7wj-q1-7Wr"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="efK-MV-Fgk">
@@ -298,6 +297,10 @@
                                     <constraint firstAttribute="width" secondItem="efK-MV-Fgk" secondAttribute="height" multiplier="1:1" id="ecj-ba-JTR"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="save"/>
+                                <connections>
+                                    <action selector="saveEvent:" destination="Guh-ED-dni" eventType="touchUpInside" id="IqE-tQ-J9L"/>
+                                    <segue destination="9Yi-IJ-VIu" kind="unwind" unwindAction="saveEventWithSegue:" id="MGM-yj-gCN"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aHx-dO-CTo">
                                 <rect key="frame" x="364" y="458" width="30" height="30"/>
@@ -423,6 +426,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Twk-cj-uCo">
+                                <rect key="frame" x="196" y="395" width="198" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="198" id="4PV-5B-bt8"/>
+                                    <constraint firstAttribute="height" constant="30" id="pAR-kN-bHd"/>
+                                    <constraint firstAttribute="width" secondItem="Twk-cj-uCo" secondAttribute="height" multiplier="33:5" id="pGu-0L-cAR"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="buttonColor:" destination="Guh-ED-dni" eventType="touchUpInside" id="aaD-VO-UAg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -454,6 +469,7 @@
                             <constraint firstItem="4z3-od-OrX" firstAttribute="bottom" secondItem="efK-MV-Fgk" secondAttribute="bottom" constant="51" id="RKQ-qu-FX8"/>
                             <constraint firstItem="4z3-od-OrX" firstAttribute="bottom" secondItem="X9Z-gf-mY7" secondAttribute="bottom" constant="51" id="SP2-8l-vWZ"/>
                             <constraint firstItem="efK-MV-Fgk" firstAttribute="top" secondItem="cbW-9K-lcN" secondAttribute="bottom" constant="204" id="Vb1-Rt-9eo"/>
+                            <constraint firstItem="GUn-lS-isz" firstAttribute="top" secondItem="Twk-cj-uCo" secondAttribute="bottom" constant="33" id="Xt8-1b-OUg"/>
                             <constraint firstItem="AmU-4i-jOv" firstAttribute="top" secondItem="g4a-o1-HXn" secondAttribute="bottom" constant="21" id="aT2-Fo-fxz"/>
                             <constraint firstItem="UGg-ax-lVd" firstAttribute="top" secondItem="I4K-a5-8EU" secondAttribute="bottom" constant="78" id="aTC-cR-UhL"/>
                             <constraint firstItem="4z3-od-OrX" firstAttribute="bottom" secondItem="dNL-Gm-d6b" secondAttribute="bottom" constant="294" id="bwn-Do-1bk"/>
@@ -474,8 +490,10 @@
                             <constraint firstItem="I4K-a5-8EU" firstAttribute="leading" secondItem="4z3-od-OrX" secondAttribute="leading" constant="35" id="nct-kb-qpG"/>
                             <constraint firstItem="bmi-oE-b4Q" firstAttribute="leading" secondItem="4z3-od-OrX" secondAttribute="leading" constant="49" id="p1k-hh-E6B"/>
                             <constraint firstItem="GUn-lS-isz" firstAttribute="top" secondItem="AmU-4i-jOv" secondAttribute="bottom" constant="38" id="qME-Xe-XbI"/>
+                            <constraint firstItem="Twk-cj-uCo" firstAttribute="leading" secondItem="AmU-4i-jOv" secondAttribute="trailing" constant="41" id="qTD-a5-7Pq"/>
                             <constraint firstItem="ggc-WH-1GI" firstAttribute="leading" secondItem="4z3-od-OrX" secondAttribute="leading" constant="112" id="qan-Tc-H1N"/>
                             <constraint firstItem="4z3-od-OrX" firstAttribute="bottom" secondItem="dp6-yd-gh5" secondAttribute="bottom" constant="490" id="r5l-sN-J3m"/>
+                            <constraint firstItem="Twk-cj-uCo" firstAttribute="top" secondItem="MEc-kv-Orb" secondAttribute="bottom" constant="23" id="sMw-y8-xtE"/>
                             <constraint firstItem="ggc-WH-1GI" firstAttribute="top" secondItem="Mat-kW-BKy" secondAttribute="bottom" constant="27" id="u95-AP-czI"/>
                             <constraint firstItem="MEc-kv-Orb" firstAttribute="top" secondItem="dp6-yd-gh5" secondAttribute="bottom" constant="20" id="v0p-Lj-goh"/>
                             <constraint firstItem="bmi-oE-b4Q" firstAttribute="top" secondItem="6M9-Yo-kC3" secondAttribute="bottom" constant="32" id="vAH-ZP-aof"/>
@@ -489,6 +507,7 @@
                     <navigationItem key="navigationItem" id="jmK-9P-UHW"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="button" destination="Twk-cj-uCo" id="4bi-vS-gJa"/>
                         <outlet property="buttonFont" destination="KBx-Na-d2a" id="D2n-l0-FEH"/>
                         <outlet property="buttonFontColor" destination="AmU-4i-jOv" id="d85-dP-jFe"/>
                         <outlet property="eventName" destination="bJi-1O-NiM" id="EXa-LD-wc0"/>

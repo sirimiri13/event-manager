@@ -23,19 +23,6 @@ class CreateGuest: UIViewController, UITextViewDelegate {
     	
     override func viewDidLoad() {
           super.viewDidLoad()
-        
-    //   let guest = myGuests()
-        
-     
-       
-       /* firstName.text = guest.firstName
-        lastName.text = guest.lastName
-        guestText.text
-        
-        try! realm.write {
-            realm.add(guest)
-        }
-        print(realm.objects(myGuests.self))*/
         self.HiddenKeyBoard()
     
     

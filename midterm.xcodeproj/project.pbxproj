@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D0B26AF2377C4EF00EE830B /* SamplePalettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B26AE2377C4EE00EE830B /* SamplePalettes.swift */; };
+		2D0B26B12377F89700EE830B /* InfoEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B26B02377F89700EE830B /* InfoEvent.swift */; };
 		2D3E5CCD23741DF100139FC9 /* MyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3E5CCC23741DF100139FC9 /* MyCell.swift */; };
 		2D7007D92371B6B10093E6CE /* AddEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7007D82371B6B00093E6CE /* AddEvent.swift */; };
 		2D7007DB2371C8350093E6CE /* record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7007DA2371C8350093E6CE /* record.swift */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D0B26AE2377C4EE00EE830B /* SamplePalettes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SamplePalettes.swift; path = "../../../Documents/solutions/ColorPickTip-master/Example/ColorPickTip/SamplePalettes.swift"; sourceTree = "<group>"; };
+		2D0B26B02377F89700EE830B /* InfoEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoEvent.swift; sourceTree = "<group>"; };
 		2D3E5CCC23741DF100139FC9 /* MyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCell.swift; sourceTree = "<group>"; };
 		2D7007D82371B6B00093E6CE /* AddEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEvent.swift; sourceTree = "<group>"; };
 		2D7007DA2371C8350093E6CE /* record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = record.swift; sourceTree = "<group>"; };
@@ -73,6 +77,7 @@
 		2DC5BDD523647F58004CF142 /* midterm */ = {
 			isa = PBXGroup;
 			children = (
+				2D0B26AE2377C4EE00EE830B /* SamplePalettes.swift */,
 				2DC5BDD623647F58004CF142 /* AppDelegate.swift */,
 				2DAF9DE623711F4200205C9A /* CreateView.swift */,
 				2DC5BDD823647F58004CF142 /* SceneDelegate.swift */,
@@ -85,6 +90,7 @@
 				2D7007DA2371C8350093E6CE /* record.swift */,
 				2D7007DC2371DD160093E6CE /* CreateGuest.swift */,
 				2D3E5CCC23741DF100139FC9 /* MyCell.swift */,
+				2D0B26B02377F89700EE830B /* InfoEvent.swift */,
 			);
 			path = midterm;
 			sourceTree = "<group>";
@@ -228,6 +234,8 @@
 				2DC5BDD723647F58004CF142 /* AppDelegate.swift in Sources */,
 				2D3E5CCD23741DF100139FC9 /* MyCell.swift in Sources */,
 				2DAF9DE723711F4200205C9A /* CreateView.swift in Sources */,
+				2D0B26AF2377C4EF00EE830B /* SamplePalettes.swift in Sources */,
+				2D0B26B12377F89700EE830B /* InfoEvent.swift in Sources */,
 				2DC5BDD923647F58004CF142 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
