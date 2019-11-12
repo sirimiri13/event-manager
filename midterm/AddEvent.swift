@@ -13,9 +13,11 @@ import SCLAlertView
 
 class AddEvent: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
-    let info = infoEvent()
+    @IBOutlet weak var titleName: UILabel!
+  
     let realm = try! Realm()
-    let realmInfo = try! Realm()
+    let info = infoEvent()
+    //let realmInfo = try! Realm()
        var myGuest = myGuests()
        var listGuest : Results<myGuests>{
            get {
@@ -25,39 +27,100 @@ class AddEvent: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
    override func viewDidLoad() {
           super.viewDidLoad()
+    //titleName.text = "CREATE NEW EVENT"
+    let event = realm.objects(infoEvent.self)
+    eventName.text = ""
+    textFont.text = "Arial"
+    sizeFont.text = "17"
+    colorLabel.backgroundColor = .black
+   // let event = realm.objects(infoEvent.self)
+   /* if (event.count == 0)
+    {
+        titleName.text = "CREATE NEW EVENT"
+    
+    }*/
+    if (event.count == 0)
+    {
+        titleName.text = "CREATE NEW EVENT"
+        eventName.text = ""
+        textFont.text = "Arial"
+        sizeFont.text = "17"
+        colorLabel.backgroundColor = .black
+    }
+    else
+    {
+        titleName.text = "EDIT EVENT"
+        eventName.text = event[0].name
+        textFont.text = event[0].font
+        sizeFont.text = event[0].fontSize
+        colorLabel.backgroundColor = event[0].fontColor?.StringToUIColor()
+       
+    }
         self.HiddenKeyBoard()
         recordsList.reloadData()
           // Do any additional setup after loading the view.
       }
     @IBOutlet weak var button: UIButton!
     
-// button color
-        @IBAction func buttonColor(_ sender: Any) {
-        //self.button.backgroundColor = UIColor(named: "#000000")
-            let paletteColors = SamplePalettes.getPalettes()
-        
+    @IBAction func changeFont(_ sender: Any) {
+        let fontPicker = UIPickerView()
+              fontPicker.delegate = self
+              
+              let tempInput = UITextField(frame:CGRect.zero)
+              tempInput.inputView = fontPicker
+              createToolbar(tempInput)
+              self.view.addSubview(tempInput)
+              tempInput.becomeFirstResponder()
+    }
     
-            let options = ColorPickTip.Options()
-       
-            let colorPickTipVC = ColorPickTipController(palette: paletteColors, options: options)
-            colorPickTipVC.popoverPresentationController?.delegate = colorPickTipVC
-            colorPickTipVC.popoverPresentationController?.sourceView = sender as? UIView
-            colorPickTipVC.popoverPresentationController?.sourceRect = (sender as AnyObject).bounds
+    func createToolbar(_ textField: UITextField) {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
         
-        self.present(colorPickTipVC, animated: true, completion: nil)
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dissmissKeyboard))
         
-           colorPickTipVC.selected = {
-            color, index in
-            print("picked color: \(String(describing: color)), index: \(String(describing: index))")
-            guard color != nil else {return}
-            self.button.backgroundColor = color
-            self.view.tintColor = color
-           // self.dismissSwitch.onTintColor = color
-            self.navigationItem.rightBarButtonItem?.tintColor = color
-           // self.info.fontColor = "Defaut"
-            
+        toolBar.setItems([doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        textField.inputAccessoryView = toolBar
     }
+    @objc func dissmissKeyboard() {
+           view.endEditing(true)
+       }
+    // button color
+    /*@IBAction func buttonColor(_ sender: Any) {
+      
+        
+    }*/
+    
+    @IBAction func changeFontButton(_ sender: Any) {
+       // self.button.backgroundColor = UIColor(named: "#000000")
+                       let paletteColors = SamplePalettes.getPalettes()
+                       let options = ColorPickTip.Options()
+                  
+                       let colorPickTipVC = ColorPickTipController(palette: paletteColors, options: options)
+                       colorPickTipVC.popoverPresentationController?.delegate = colorPickTipVC
+                       colorPickTipVC.popoverPresentationController?.sourceView = sender as? UIView
+                       colorPickTipVC.popoverPresentationController?.sourceRect = (sender as AnyObject).bounds
+                   
+                   self.present(colorPickTipVC, animated: true, completion: nil)
+                   
+                      colorPickTipVC.selected = {
+                       color, index in
+                       print("picked color: \(String(describing: color)), index: \(String(describing: index))")
+                       guard color != nil else {return}
+                      // self..backgroundColor = color         // self.button.backgroundColor = color
+                      // self.view.tintColor = color
+                      // self.dismissSwitch.onTintColor = color
+                       self.navigationItem.rightBarButtonItem?.tintColor = color
+                       //self.buttonFontColor.
+                       self.colorLabel.backgroundColor = color
+                        self.info.fontColor = color?.UIColorToString()
+                        //self.info.fontColor = color?.UIColorToString()
+                        
+           }
     }
+    @IBOutlet weak var colorLabel: UILabel!
     @IBOutlet weak var recordsList: UITableView!
     @IBOutlet weak var buttonFontColor: UIButton!
     @IBOutlet weak var sizeFont: UILabel!
@@ -69,8 +132,10 @@ class AddEvent: UIViewController, UITableViewDelegate, UITableViewDataSource{
     // slider font size
     @IBAction func changeSizeFont(_ sender: Any) {
         let size = sliderSizeFont.value
-        sizeFont.text = String(size)
-       info.fontSize = sizeFont.text
+            let temp = Int(size)
+        sizeFont.text = String(temp)
+       // info.fontSize = String(temp)
+        //self.info.fontSize = sizeFont.text
     }
    
     
@@ -101,7 +166,7 @@ class AddEvent: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
  // exit
     @IBAction func exitNewEvent(_ sender: Any) {
-        let alert = SCLAlertView()
+       /* let alert = SCLAlertView()
         alert.addButton("OK"){ () -> Void in
         let story = self.storyboard
         let addView = story?.instantiateViewController(withIdentifier: "CreateView") as! CreateView
@@ -111,7 +176,7 @@ class AddEvent: UIViewController, UITableViewDelegate, UITableViewDataSource{
                 self.realm.deleteAll()
         }
         }
-        alert.showNotice("Notice", subTitle: "Your event is not created if you exit")
+        alert.showNotice("Notice", subTitle: "Your event is not created if you exit")*/
     }
     
     
@@ -136,15 +201,43 @@ class AddEvent: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     //save event
   @IBAction func saveEvent(_ sender: Any) {
-        info.name = eventName.text
-        try! realmInfo.write {
-            realmInfo.add(info)
+    print(Realm.Configuration.defaultConfiguration.fileURL)
+       let event = realm.objects(infoEvent.self)
+        if (event.count == 0) {
+            if (eventName.text == ""){
+                SCLAlertView().showError("Error", subTitle: "Please enter your event name!!!")
+            }
+            else {
+                let myEvent = infoEvent()
+                myEvent.name = eventName.text
+                myEvent.fontSize = sizeFont.text
+                //myEvent.font =
+                myEvent.fontColor = colorLabel.backgroundColor?.UIColorToString()
+                try! realm.write {
+                    realm.add(myEvent)
+                }
+                SCLAlertView().showInfo("Success", subTitle: "Your event has been created!")
+                self.dismiss(animated: true, completion: nil)
+            }
         }
-    print(realmInfo.objects(infoEvent.self))
-    }
-    
+        else {
+            if (eventName.text == ""){
+                SCLAlertView().showError("Error", subTitle: "Please enter your event name!!!")
+            }
+            else {
+                try! realm.write {
+                    event[0].name = eventName.text
+                   // event[0].font = selectedFont
+                    event[0].fontSize = sizeFont.text
+                    event[0].fontColor = colorLabel.backgroundColor?.UIColorToString()
+                    
+                }
+                SCLAlertView().showInfo("Success", subTitle: "Your event has been UPDATED!")
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
 }
-
+}
 // ẩn bàn phím
 extension AddEvent{
     func HiddenKeyBoard(){
@@ -157,3 +250,41 @@ extension AddEvent{
     }
 }
 
+
+extension AddEvent: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return UIFont.familyNames.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return UIFont.familyNames[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        textFont.text = UIFont.familyNames[row]
+       // textFont.text = selectedFont
+    }
+}
+
+extension UIColor {
+    func UIColorToString() -> String {
+        let components = self.cgColor.components
+        return "[\(components![0]), \(components![1]), \(components![2]), \(components![3])]"
+    }
+    
+}
+
+extension String {
+    func StringToUIColor() -> UIColor {
+        let componentsString = self.replacingOccurrences(of: "[", with: "").replacingOccurrences(of: "]", with: "")
+        let components = componentsString.components(separatedBy: ", ")
+        return UIColor(red: CGFloat((components[0] as NSString).floatValue),
+                     green: CGFloat((components[1] as NSString).floatValue),
+                      blue: CGFloat((components[2] as NSString).floatValue),
+                     alpha: CGFloat((components[3] as NSString).floatValue))
+    }
+}

@@ -10,26 +10,57 @@ import UIKit
 import SCLAlertView
 import RealmSwift
 class CreateView: UIViewController {
-
+    let realm = try! Realm()
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+      /*  let event = realm.objects(infoEvent.self)
+        if (event.count == 0)
+            eventName
+*/
+        
     }
  
 
     @IBAction func createEvent(_ sender: Any) {
-       let alert = SCLAlertView()
-        alert.addButton("OK"){ () -> Void in
-          let story = self.storyboard
-          let addView = story?.instantiateViewController(withIdentifier: "AddEvent") as! AddEvent
+       
+        let event = realm.objects(infoEvent.self)
+        if ( event.count == 0){
+            let story = self.storyboard
+            let addView = story?.instantiateViewController(withIdentifier: "AddEvent") as! AddEvent
+            addView.modalPresentationStyle = .fullScreen
             self.present(addView, animated: false)
-         
+        }
+        else {
+            let alert = SCLAlertView()
+            alert.addButton("OK"){ () -> Void in
+            let story = self.storyboard
+            let addView = story?.instantiateViewController(withIdentifier: "AddEvent") as! AddEvent
+            addView.modalPresentationStyle = .fullScreen
+            self.present(addView, animated: false)
+            try!  self.realm.write{
+                self.realm.deleteAll()
+            }
           }
-        
-        alert.showInfo("", subTitle: "Creating new event will delete all the info from the previous or current event in the app")
+    
+        alert.showWarning("", subTitle: "Creating new event will delete all the info from the previous or current event in the app")
+        }
     }
     
+    @IBAction func editEvent(_ sender: Any) {
+        let alert = SCLAlertView()
+      //  alert.addButton("OK"){ () -> Void in
+        let event = realm.objects(infoEvent.self)
+              if ( event.count == 0){
+                    alert.showInfo("", subTitle: "Your Event is not exist")
+              }
+              else {
+                  
+                  let story = self.storyboard
+                  let addView = story?.instantiateViewController(withIdentifier: "AddEvent") as! AddEvent
+                  addView.modalPresentationStyle = .fullScreen
+                  self.present(addView, animated: false)
+                  }
+                }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -44,5 +75,7 @@ class CreateView: UIViewController {
     @IBAction func saveEvent(segue: UIStoryboardSegue){
     }
 }
+
+
 
 

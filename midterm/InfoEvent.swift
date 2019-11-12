@@ -13,5 +13,5 @@ class infoEvent: Object{
     @objc dynamic var name: String?
     @objc dynamic var font: String?
     @objc dynamic var fontSize: String?
-  //  @objc dynamic var fontColor: String?
+    @objc dynamic var fontColor: String?
 }
