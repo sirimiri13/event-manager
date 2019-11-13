@@ -14,7 +14,11 @@ import SCLAlertView
 class AddEvent: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var titleName: UILabel!
-  
+    var nameEvent : String = ""
+   
+    var size : String = "20"
+    var color : String = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1).UIColorToString()
+    var selectFont : String = "Arial"
     let realm = try! Realm()
     let info = infoEvent()
     //let realmInfo = try! Realm()
@@ -30,8 +34,8 @@ class AddEvent: UIViewController, UITableViewDelegate, UITableViewDataSource{
     //titleName.text = "CREATE NEW EVENT"
     let event = realm.objects(infoEvent.self)
     eventName.text = ""
-    textFont.text = "Arial"
-    sizeFont.text = "17"
+    textFont.text = selectFont
+    sizeFont.text = size
     colorLabel.backgroundColor = .black
    // let event = realm.objects(infoEvent.self)
    /* if (event.count == 0)
@@ -43,9 +47,9 @@ class AddEvent: UIViewController, UITableViewDelegate, UITableViewDataSource{
     {
         titleName.text = "CREATE NEW EVENT"
         eventName.text = ""
-        textFont.text = "Arial"
-        sizeFont.text = "17"
-        colorLabel.backgroundColor = .black
+        textFont.text = selectFont
+        sizeFont.text = size
+        colorLabel.backgroundColor = color.StringToUIColor()
     }
     else
     {
@@ -65,20 +69,18 @@ class AddEvent: UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBAction func changeFont(_ sender: Any) {
         let fontPicker = UIPickerView()
               fontPicker.delegate = self
-              
               let tempInput = UITextField(frame:CGRect.zero)
               tempInput.inputView = fontPicker
               createToolbar(tempInput)
               self.view.addSubview(tempInput)
               tempInput.becomeFirstResponder()
+                
     }
     
     func createToolbar(_ textField: UITextField) {
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
-        
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dissmissKeyboard))
-        
         toolBar.setItems([doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
         
@@ -162,8 +164,7 @@ class AddEvent: UIViewController, UITableViewDelegate, UITableViewDataSource{
        // recordsList.reloadData()
          return cell1
        }
-    
-
+   
  // exit
     @IBAction func exitNewEvent(_ sender: Any) {
        /* let alert = SCLAlertView()
@@ -211,7 +212,7 @@ class AddEvent: UIViewController, UITableViewDelegate, UITableViewDataSource{
                 let myEvent = infoEvent()
                 myEvent.name = eventName.text
                 myEvent.fontSize = sizeFont.text
-                //myEvent.font =
+                myEvent.font = textFont.text
                 myEvent.fontColor = colorLabel.backgroundColor?.UIColorToString()
                 try! realm.write {
                     realm.add(myEvent)
@@ -222,17 +223,17 @@ class AddEvent: UIViewController, UITableViewDelegate, UITableViewDataSource{
         }
         else {
             if (eventName.text == ""){
-                SCLAlertView().showError("Error", subTitle: "Please enter your event name!!!")
+                SCLAlertView().showError("Error", subTitle: "Please enter your event name!")
             }
             else {
                 try! realm.write {
                     event[0].name = eventName.text
-                   // event[0].font = selectedFont
+                    event[0].font = textFont.text
                     event[0].fontSize = sizeFont.text
                     event[0].fontColor = colorLabel.backgroundColor?.UIColorToString()
                     
                 }
-                SCLAlertView().showInfo("Success", subTitle: "Your event has been UPDATED!")
+                SCLAlertView().showSuccess("Success", subTitle: "Your event has been UPDATED!")
                 self.dismiss(animated: true, completion: nil)
             }
         }
@@ -264,9 +265,14 @@ extension AddEvent: UIPickerViewDelegate, UIPickerViewDataSource {
         return UIFont.familyNames[row]
     }
     
+
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        textFont.text = UIFont.familyNames[row]
-       // textFont.text = selectedFont
+        //textFont.text = UIFont.familyNames[row]
+        selectFont = UIFont.familyNames[row]
+        textFont.text = selectFont
+        textFont.font = UIFont(name: selectFont, size: 16)
+        
     }
 }
 

@@ -33,13 +33,14 @@ class CreateView: UIViewController {
         else {
             let alert = SCLAlertView()
             alert.addButton("OK"){ () -> Void in
+            try!  self.realm.write{
+                self.realm.deleteAll()
+            }
             let story = self.storyboard
             let addView = story?.instantiateViewController(withIdentifier: "AddEvent") as! AddEvent
             addView.modalPresentationStyle = .fullScreen
             self.present(addView, animated: false)
-            try!  self.realm.write{
-                self.realm.deleteAll()
-            }
+            
           }
     
         alert.showWarning("", subTitle: "Creating new event will delete all the info from the previous or current event in the app")
@@ -69,6 +70,15 @@ class CreateView: UIViewController {
         // Pass the selected object to the new view controller.
     }
     @IBAction func unwindToCreateEvent(segue: UIStoryboardSegue){
+        let event = realm.objects(infoEvent.self)
+        if (event.count == 0)
+        {
+            let alert = SCLAlertView()
+            alert.showWarning("",subTitle: "Your event is not created")
+            try! realm.write {
+                realm.deleteAll()
+            }
+        }
        
       
     }
