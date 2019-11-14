@@ -67,17 +67,50 @@ class AddEvent: UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var button: UIButton!
     
     @IBAction func changeFont(_ sender: Any) {
-        let fontPicker = UIPickerView()
+       /* let fontPicker = UIPickerView()
               fontPicker.delegate = self
               let tempInput = UITextField(frame:CGRect.zero)
               tempInput.inputView = fontPicker
               createToolbar(tempInput)
               self.view.addSubview(tempInput)
-              tempInput.becomeFirstResponder()
+              tempInput.becomeFirstResponder()*/
+        let alertView = UIAlertController(
+                   title: "Select Font",
+                   message: "\n\n\n\n\n\n\n\n\n",
+                   preferredStyle: .alert)
+
+               let fontPicker = UIPickerView(frame: CGRect(x: 0, y: 50, width: 260, height: 162))
+               fontPicker.dataSource = self
+               fontPicker.delegate = self
+                fontPicker.backgroundColor = UIColor.lightGray.withAlphaComponent(0.2)
+
+                       alertView.view.addSubview(fontPicker)
+
+                       let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                       let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+                           let event = self.realm.objects(infoEvent.self)
+                           if (event.count == 0){
+                               self.selectFont = "Arial"
+                               self.textFont.text = self.selectFont
+                                self.textFont.font = UIFont(name: self.selectFont, size: 16)
+                           }
+                           else {
+                            self.selectFont = event[0].font!
+                               self.textFont.text = self.selectFont
+                               self.textFont.font = UIFont(name: self.selectFont, size: 16)
+                           }
+                       }
+                       alertView.addAction(okAction)
+                       alertView.addAction(cancelAction)
+                       alertView.preferredAction = okAction
+                       
+                       present(alertView, animated: true, completion: { () in
+                           fontPicker.frame.size.width = alertView.view.frame.size.width
+                       })
                 
     }
     
-    func createToolbar(_ textField: UITextField) {
+   /* func createToolbar(_ textField: UITextField) {
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dissmissKeyboard))
@@ -85,7 +118,7 @@ class AddEvent: UIViewController, UITableViewDelegate, UITableViewDataSource{
         toolBar.isUserInteractionEnabled = true
         
         textField.inputAccessoryView = toolBar
-    }
+    }*/
     @objc func dissmissKeyboard() {
            view.endEditing(true)
        }

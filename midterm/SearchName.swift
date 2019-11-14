@@ -106,11 +106,19 @@ class SearchName: UIViewController {
         default:
             select = ""
         }
-        let story = self.storyboard
+        let guest = realm.objects(myGuests.self).filter("lastName BEGINSWITH '\(select)'")
+        if (guest.count == 0)
+        {
+            let alert = SCLAlertView()
+            alert.showInfo("", subTitle: "No guests found")
+        }
+        else {
+            let story = self.storyboard
             let addView = story?.instantiateViewController(withIdentifier: "SelectName") as! SelectName
             addView.modalPresentationStyle = .fullScreen
             addView.select = select
             self.present(addView, animated: false)
+        }
          
     }
     
