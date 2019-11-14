@@ -1,6 +1,0 @@
-framework module ColorPickTip {
-  umbrella header "ColorPickTip-umbrella.h"
-
-  export *
-  module * { export * }
-}
