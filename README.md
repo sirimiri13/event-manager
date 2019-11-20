@@ -1,3 +1,3 @@
 # event-manager
-pod init
-pod install
+1. Install pod 
+2. Login API (username: username, password: pass)
