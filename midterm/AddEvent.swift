@@ -130,7 +130,7 @@ class AddEvent: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     @IBAction func changeFontButton(_ sender: Any) {
        // self.button.backgroundColor = UIColor(named: "#000000")
-                       let paletteColors = SamplePalettes.getPalettes()
+                       let paletteColors = ColorPalletes.hue10
                        let options = ColorPickTip.Options()
                   
                        let colorPickTipVC = ColorPickTipController(palette: paletteColors, options: options)

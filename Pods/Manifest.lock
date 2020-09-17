@@ -1,0 +1,30 @@
+PODS:
+  - ColorPickTip (0.4.0)
+  - Realm (5.4.1):
+    - Realm/Headers (= 5.4.1)
+  - Realm/Headers (5.4.1)
+  - RealmSwift (5.4.1):
+    - Realm (= 5.4.1)
+  - SCLAlertView (0.8)
+
+DEPENDENCIES:
+  - ColorPickTip
+  - RealmSwift
+  - SCLAlertView
+
+SPEC REPOS:
+  trunk:
+    - ColorPickTip
+    - Realm
+    - RealmSwift
+    - SCLAlertView
+
+SPEC CHECKSUMS:
+  ColorPickTip: 1f0c9d39defb585fa8131ab79ef04bce147b543e
+  Realm: 7e887608ef1de2d0c3a33dd9b1449e08fc9d9807
+  RealmSwift: ef998d9b678fd74e047c56ef4d99d9b77e87c1eb
+  SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
+
+PODFILE CHECKSUM: a43163c68bc019a492cc0178060f049865d6fc87
+
+COCOAPODS: 1.9.0.beta.3

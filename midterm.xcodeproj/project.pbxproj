@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2D0B26AF2377C4EF00EE830B /* SamplePalettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B26AE2377C4EE00EE830B /* SamplePalettes.swift */; };
+		2D0AC3502513638C00E94A8C /* SamplePalletes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0AC34F2513638C00E94A8C /* SamplePalletes.swift */; };
 		2D0B26B12377F89700EE830B /* InfoEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B26B02377F89700EE830B /* InfoEvent.swift */; };
 		2D0B26B5237AABC600EE830B /* backgroundEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B26B4237AABC600EE830B /* backgroundEvent.swift */; };
 		2D3E5CCD23741DF100139FC9 /* MyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3E5CCC23741DF100139FC9 /* MyCell.swift */; };
@@ -29,7 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2D0B26AE2377C4EE00EE830B /* SamplePalettes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SamplePalettes.swift; path = "../../../Documents/solutions/ColorPickTip-master/Example/ColorPickTip/SamplePalettes.swift"; sourceTree = "<group>"; };
+		2D0AC34F2513638C00E94A8C /* SamplePalletes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamplePalletes.swift; sourceTree = "<group>"; };
 		2D0B26B02377F89700EE830B /* InfoEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoEvent.swift; sourceTree = "<group>"; };
 		2D0B26B4237AABC600EE830B /* backgroundEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = backgroundEvent.swift; sourceTree = "<group>"; };
 		2D3E5CCC23741DF100139FC9 /* MyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCell.swift; sourceTree = "<group>"; };
@@ -87,7 +87,6 @@
 		2DC5BDD523647F58004CF142 /* midterm */ = {
 			isa = PBXGroup;
 			children = (
-				2D0B26AE2377C4EE00EE830B /* SamplePalettes.swift */,
 				2DC5BDD623647F58004CF142 /* AppDelegate.swift */,
 				2DAF9DE623711F4200205C9A /* CreateView.swift */,
 				2DC5BDD823647F58004CF142 /* SceneDelegate.swift */,
@@ -106,6 +105,7 @@
 				2DBB1A7A237B114D006B3390 /* SelectName.swift */,
 				2DBB1A7E237BBD50006B3390 /* InfoGuestViewController.swift */,
 				2DBB1A80237BF027006B3390 /* LoginViewController.swift */,
+				2D0AC34F2513638C00E94A8C /* SamplePalletes.swift */,
 			);
 			path = midterm;
 			sourceTree = "<group>";
@@ -245,6 +245,7 @@
 				2D7007DB2371C8350093E6CE /* record.swift in Sources */,
 				2DBB1A7B237B114D006B3390 /* SelectName.swift in Sources */,
 				2DC5BDDB23647F58004CF142 /* ViewController.swift in Sources */,
+				2D0AC3502513638C00E94A8C /* SamplePalletes.swift in Sources */,
 				2DBB1A81237BF027006B3390 /* LoginViewController.swift in Sources */,
 				2DBB1A7F237BBD50006B3390 /* InfoGuestViewController.swift in Sources */,
 				2D0B26B5237AABC600EE830B /* backgroundEvent.swift in Sources */,
@@ -253,7 +254,6 @@
 				2DC5BDD723647F58004CF142 /* AppDelegate.swift in Sources */,
 				2D3E5CCD23741DF100139FC9 /* MyCell.swift in Sources */,
 				2DAF9DE723711F4200205C9A /* CreateView.swift in Sources */,
-				2D0B26AF2377C4EF00EE830B /* SamplePalettes.swift in Sources */,
 				2D0B26B12377F89700EE830B /* InfoEvent.swift in Sources */,
 				2DBB1A79237AF56B006B3390 /* SearchName.swift in Sources */,
 				2DC5BDD923647F58004CF142 /* SceneDelegate.swift in Sources */,
